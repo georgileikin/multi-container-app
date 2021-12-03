@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=rest_api
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
   couchbase:
     image: couchbase:latest
   microservice:
@@ -15,5 +23,30 @@ services:
       - COUCHBASE_USER=Administrator
       - COUCHBASE_PASSWORD=password
       - COUCHBASE_BUCKET=default
+    volumes:
+      - ./microservice:/usr/src/microservice
+  rest_api:
+    depends_on:
+      - postgres
+      - microservice
+    build:
+      context: ./rest_api
+      dockerfile: Dockerfile
+    volumes:
+      - ./rest_api:/usr/src/rest_api
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - DB=postgresql
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=rest_api
+      - DB_USER=admin
+      - DB_PASSWORD=password
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - MICROSERVICE_HOST=microservice
+      - MICROSERVICE_PORT=8001
     ports:
-      - "8001:8001"
+      - "8000:8000"
+
+volumes:
+  postgres_data:

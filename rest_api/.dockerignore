@@ -1,0 +1,6 @@
+venv/
+
+Dockerfile
+.dockerignore
+
+db.sqlite3
