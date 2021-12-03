@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  couchbase:
+    image: couchbase:latest
+  microservice:
+    depends_on:
+      - couchbase
+    build:
+      context: microservice
+      dockerfile: Dockerfile
+    environment:
+      - COUCHBASE_HOST=couchbase
+      - COUCHBASE_PORT=8091
+      - COUCHBASE_USER=Administrator
+      - COUCHBASE_PASSWORD=password
+      - COUCHBASE_BUCKET=default
+    ports:
+      - "8001:8001"
