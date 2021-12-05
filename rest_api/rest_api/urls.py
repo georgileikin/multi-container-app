@@ -19,8 +19,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from app.router import routes
 
 urlpatterns = [
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain'),
+    path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/', include(routes.urls))
 ]
