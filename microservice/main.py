@@ -95,7 +95,7 @@ except (AuthenticationException, BucketNotFoundException, TimeoutException) as e
     sys.exit(1)
 
 
-@ms.get('/ms/secret/{key}', status_code=status.HTTP_200_OK)
+@ms.get('/ms/secret/{key}')
 def get_secret(key: str):
     try:
         result = cb_connection.get_value(from_collection=cb_collection, key=key)

@@ -20,6 +20,26 @@
       - [ ] Backup
   - Click `Save & Finish`
   - In the left menu click `Buckets`
-  - In the top right corner click `Add mucket`
+  - In the top right corner click `Add bucket`
     - Name: `default`
     - Click `Add bucket`
+
+### Creating a new user and authorizing the user
+
+- Start the Django management console
+  - `python manage.py shell`
+- Import the user model
+  - `from django.contrib.auth.models import User`
+- Create a user
+  - `User.objects.create_user(username='<username>', email='<email>', password='<password>')`
+- Fetch the user token (cURL)
+  ```
+    curl --location --request POST 'http://localhost:8000/token/' \
+         --header 'Content-Type: application/json' \
+         --data-raw '{"username": "<username>", "password": "<password>"}'
+  ```
+- Use the access token for authorization
+  ```
+    curl --location --request GET 'http://localhost:8000/api/items/' \
+         --header 'Authorization: Bearer <access_token>'
+  ```
