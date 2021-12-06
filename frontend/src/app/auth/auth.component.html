@@ -42,6 +42,9 @@
 </div>
 <div *ngIf="isAuthenticated">
   <div class="col-12">
+    <span class="navbar-text fst-italic" style='margin-right: 10px'>
+      {{ getUserString() }}
+    </span>
     <button type="button" class="btn btn-outline-danger" (click)="onLogout()">
       Clear token
     </button>

@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { UserModel } from '../user.model';
 
 export const AUTHENTICATE = '[Auth] Authenticate user';
 export const AUTHENTICATE_SUCCESS = '[Auth] Authenticate success';
@@ -14,7 +15,7 @@ export class Authenticate implements Action {
 export class AuthenticateSuccess implements Action {
   readonly type: typeof AUTHENTICATE_SUCCESS = AUTHENTICATE_SUCCESS;
 
-  constructor(public payload: { accessToken: string; refreshToken: string }) {}
+  constructor(public payload: { user: UserModel }) {}
 }
 
 export class ClearAuthentication implements Action {

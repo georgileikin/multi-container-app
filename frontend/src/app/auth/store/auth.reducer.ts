@@ -1,13 +1,12 @@
 import * as authActions from './auth.actions';
+import { UserModel } from '../user.model';
 
 export interface AuthState {
-  accessToken: string;
-  refreshToken: string;
+  user: UserModel
 }
 
 const initialState: AuthState = {
-  accessToken: null,
-  refreshToken: null
+  user: null
 };
 
 export function authReducer(
@@ -18,14 +17,12 @@ export function authReducer(
     case authActions.AUTHENTICATE_SUCCESS:
       return {
         ...state,
-        accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken
+        user: action.payload.user
       };
     case authActions.CLEAR_AUTHENTICATION:
       return {
         ...state,
-        accessToken: null,
-        refreshToken: null
+        user: null
       };
     default:
       return {

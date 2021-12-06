@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 
 import * as appStore from '../store/app.reducer';
 import * as authActions from './store/auth.actions';
+import { UserModel } from './user.model';
 
 @Component({
   selector: 'app-auth',
@@ -13,6 +14,7 @@ import * as authActions from './store/auth.actions';
 })
 export class AuthComponent implements OnInit {
   @ViewChild('fetchTokenForm') fetchTokenForm: NgForm;
+  loggedInUser: UserModel = null;
   isAuthenticated: boolean = false;
 
   constructor(private store: Store<appStore.AppState>) {}
@@ -22,11 +24,12 @@ export class AuthComponent implements OnInit {
       .select('auth')
       .pipe(
         map((authState: appStore.AppState['auth']) => {
-          return authState.accessToken;
+          return authState.user;
         })
       )
-      .subscribe((accessToken: string) => {
-        this.isAuthenticated = !!accessToken;
+      .subscribe((user: UserModel) => {
+        this.loggedInUser = user;
+        this.isAuthenticated = !!user;
       });
   }
 
@@ -41,5 +44,9 @@ export class AuthComponent implements OnInit {
 
   onLogout() {
     this.store.dispatch(new authActions.ClearAuthentication());
+  }
+
+  getUserString() {
+    return `${this.loggedInUser.firstName} ${this.loggedInUser.lastName} (${this.loggedInUser.username})`
   }
 }
