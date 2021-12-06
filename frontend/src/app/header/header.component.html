@@ -1,40 +1,6 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand">Multi container app</a>
-    <form
-      (ngSubmit)="onSubmit()"
-      class="row row-cols-lg-auto g-3 align-items-center"
-      #fetchTokenForm="ngForm">
-      <div class="col-12">
-        <div class="input-group">
-          <input
-            class="form-control"
-            id="username"
-            name="username"
-            ngModel
-            placeholder="Username"
-            type="text" />
-        </div>
-      </div>
-
-      <div class="col-12">
-        <label class="visually-hidden" for="password">Username</label>
-        <div class="input-group">
-          <input
-            class="form-control"
-            id="password"
-            name="password"
-            ngModel
-            placeholder="Password"
-            type="password" />
-        </div>
-      </div>
-
-      <div class="col-12">
-        <button type="submit" class="btn btn-outline-success">
-          Fetch token
-        </button>
-      </div>
-    </form>
+    <app-auth></app-auth>
   </div>
 </nav>

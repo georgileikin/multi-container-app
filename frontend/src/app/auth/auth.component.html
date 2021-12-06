@@ -1,0 +1,49 @@
+<div *ngIf="!isAuthenticated">
+  <form
+    (ngSubmit)="onSubmit()"
+    class="row row-cols-lg-auto g-3 align-items-center"
+    #fetchTokenForm="ngForm">
+    <div class="col-12">
+      <div class="input-group">
+        <input
+          class="form-control"
+          id="username"
+          name="username"
+          ngModel
+          placeholder="Username"
+          type="text"
+          required />
+      </div>
+    </div>
+
+    <div class="col-12">
+      <label class="visually-hidden" for="password">Username</label>
+      <div class="input-group">
+        <input
+          class="form-control"
+          id="password"
+          name="password"
+          ngModel
+          placeholder="Password"
+          type="password"
+          required />
+      </div>
+    </div>
+
+    <div class="col-12">
+      <button
+        type="submit"
+        class="btn btn-outline-success"
+        [disabled]="!fetchTokenForm.valid">
+        Fetch token
+      </button>
+    </div>
+  </form>
+</div>
+<div *ngIf="isAuthenticated">
+  <div class="col-12">
+    <button type="button" class="btn btn-outline-danger" (click)="onLogout()">
+      Clear token
+    </button>
+  </div>
+</div>
