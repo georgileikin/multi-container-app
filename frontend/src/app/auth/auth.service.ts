@@ -13,7 +13,6 @@ export class AuthService {
   constructor(private store: Store<appStore.AppState>) {}
 
   setLogoutTimer(expiresIn: number) {
-    console.log(expiresIn);
     this.logoutTimer = window.setTimeout(() => {
       this.store.dispatch(new authActions.ClearAuthentication());
     }, expiresIn);
