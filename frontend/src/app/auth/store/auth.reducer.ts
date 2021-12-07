@@ -2,7 +2,7 @@ import * as authActions from './auth.actions';
 import { UserModel } from '../user.model';
 
 export interface AuthState {
-  user: UserModel
+  user: UserModel;
 }
 
 const initialState: AuthState = {

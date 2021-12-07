@@ -10,13 +10,13 @@ import * as authActions from './store/auth.actions';
 export class AuthService {
   private logoutTimer: number;
 
-  constructor(private store: Store<appStore.AppState>) { }
+  constructor(private store: Store<appStore.AppState>) {}
 
   setLogoutTimer(expiresIn: number) {
     console.log(expiresIn);
     this.logoutTimer = window.setTimeout(() => {
-      this.store.dispatch(new authActions.ClearAuthentication())
-    }, expiresIn)
+      this.store.dispatch(new authActions.ClearAuthentication());
+    }, expiresIn);
   }
 
   clearLogoutTimer() {

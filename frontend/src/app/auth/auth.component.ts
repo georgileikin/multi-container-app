@@ -47,6 +47,6 @@ export class AuthComponent implements OnInit {
   }
 
   getUserString() {
-    return `${this.loggedInUser.firstName} ${this.loggedInUser.lastName} (${this.loggedInUser.username})`
+    return `${this.loggedInUser.firstName} ${this.loggedInUser.lastName} (${this.loggedInUser.username})`;
   }
 }
