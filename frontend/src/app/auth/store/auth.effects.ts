@@ -31,7 +31,8 @@ const handleAuthenticate = (authResponse: TokenResponse) => {
     user.last_name,
     user.email,
     access.token,
-    expirationDate
+    expirationDate,
+    user.permissions
   )
 
   return new authActions.AuthenticateSuccess({

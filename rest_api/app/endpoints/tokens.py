@@ -29,12 +29,15 @@ class UserTokenSerializer(TokenObtainPairSerializer):
             )
         )
 
+        user_permissions = self.user.user_permissions.all()
+
         data.update(dict(
             user=dict(
                 username=self.user.username,
                 first_name=self.user.first_name,
                 last_name=self.user.last_name,
-                email=self.user.email
+                email=self.user.email,
+                permissions=[perm.codename for perm in user_permissions] if len(user_permissions) > 0 else ['__all__']
             ),
         ))
 

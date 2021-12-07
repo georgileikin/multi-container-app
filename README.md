@@ -43,3 +43,17 @@
     curl --location --request GET 'http://localhost:8000/api/items/' \
          --header 'Authorization: Bearer <access_token>'
   ```
+
+### Optional: Setting user permissions
+
+- Start the Django management console
+  - `python manage.py shell`
+- Import the user and permission models
+  - `from django.contrib.auth.models import User`
+  - `from django.contrib.auth.models import Permission`
+- Grant the user permissions
+  - `user = User.objects.get(username='<username>')`
+  - `permission = Permission.objects.get(codename='<permission_codename>')`
+  - `user.user_permissions.set([permission])`
+  - or
+  - `user.user_permissions.add(permission)`
