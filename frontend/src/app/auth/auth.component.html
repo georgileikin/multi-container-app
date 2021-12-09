@@ -1,52 +1,54 @@
 <div *ngIf="!isAuthenticated">
   <form
     (ngSubmit)="onSubmit()"
-    class="row row-cols-lg-auto g-3 align-items-center"
+    class="row g-3 align-items-center"
     #fetchTokenForm="ngForm">
     <div class="col-12">
-      <div class="input-group">
-        <input
-          class="form-control"
-          id="username"
-          name="username"
-          ngModel
-          placeholder="Username"
-          type="text"
-          required />
-      </div>
+      <label class="visually-hidden" for="username">Username</label>
+      <input
+        class="form-control"
+        id="username"
+        name="username"
+        ngModel
+        placeholder="Username"
+        type="text"
+        required />
     </div>
 
     <div class="col-12">
-      <label class="visually-hidden" for="password">Username</label>
-      <div class="input-group">
-        <input
-          class="form-control"
-          id="password"
-          name="password"
-          ngModel
-          placeholder="Password"
-          type="password"
-          required />
-      </div>
+      <label class="visually-hidden" for="password">Password</label>
+      <input
+        class="form-control"
+        id="password"
+        name="password"
+        ngModel
+        placeholder="Password"
+        type="password"
+        required />
     </div>
 
     <div class="col-12">
       <button
         type="submit"
-        class="btn btn-outline-success"
+        class="btn btn-outline-success w-100"
         [disabled]="!fetchTokenForm.valid">
-        Fetch token
+        Authenticate
       </button>
     </div>
   </form>
 </div>
 <div *ngIf="isAuthenticated">
-  <div class="col-12">
-    <span class="navbar-text fst-italic" style="margin-right: 10px">
+  <div class="col-12 mb-3">
+    <span class="navbar-text fst-italic">
       {{ getUserString() }}
     </span>
-    <button type="button" class="btn btn-outline-danger" (click)="onLogout()">
-      Clear token
+  </div>
+  <div class="col-12">
+    <button
+      type="button"
+      class="btn btn-outline-danger w-100"
+      (click)="onLogout()">
+      Leave
     </button>
   </div>
 </div>

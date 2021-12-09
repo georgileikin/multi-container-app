@@ -14,9 +14,19 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthEffects } from './auth/store/auth.effects';
 import { HeaderComponent } from './header/header.component';
 import { appReducer } from './store/app.reducer';
+import { ContentComponent } from './content/content.component';
+import { HomeComponent } from './content/home/home.component';
+import { ItemsComponent } from './content/items/items.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, AuthComponent],
+  declarations: [
+    AppComponent,
+    AuthComponent,
+    HeaderComponent,
+    HomeComponent,
+    ContentComponent,
+    ItemsComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
