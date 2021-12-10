@@ -20,7 +20,7 @@ export class AutoAuthenticate implements Action {
 export class AuthenticateSuccess implements Action {
   readonly type: typeof AUTHENTICATE_SUCCESS = AUTHENTICATE_SUCCESS;
 
-  constructor(public payload: { user: UserModel }) {}
+  constructor(public payload: { user: UserModel; redirect: boolean }) {}
 }
 
 export class ClearAuthentication implements Action {

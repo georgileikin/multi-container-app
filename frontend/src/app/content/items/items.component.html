@@ -1,1 +1,17 @@
-<p>items works!</p>
+<div class="container">
+  <div class="row">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" [routerLink]="['/items/list']" routerLinkActive="active">List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/items/create']" routerLinkActive="active">Form</a>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+

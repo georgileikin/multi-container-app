@@ -35,7 +35,8 @@ const handleAuthenticate = (authResponse: TokenResponse) => {
   localStorage.setItem('authUser', JSON.stringify(authUser));
 
   return new authActions.AuthenticateSuccess({
-    user: authUser
+    user: authUser,
+    redirect: true
   });
 };
 
@@ -84,10 +85,24 @@ export class AuthEffects {
         this.authService.setLogoutTimer(authUser._expiration - Date.now());
 
         return new authActions.AuthenticateSuccess({
-          user: authUser
+          user: authUser,
+          redirect: false
         });
       })
     )
+  );
+
+  authRedirect = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.AUTHENTICATE_SUCCESS),
+        tap((action: authActions.AuthenticateSuccess) => {
+          if (action.payload.redirect) {
+            this.router.navigate(['/items']);
+          }
+        })
+      ),
+    { dispatch: false }
   );
 
   clearAuthentication = createEffect(
@@ -97,7 +112,7 @@ export class AuthEffects {
         tap(() => {
           this.authService.clearLogoutTimer();
           localStorage.removeItem('authUser');
-          this.router.navigate(['/']);
+          this.router.navigateByUrl('/home');
         })
       ),
     { dispatch: false }

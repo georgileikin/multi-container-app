@@ -17,6 +17,10 @@ import { appReducer } from './store/app.reducer';
 import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './content/home/home.component';
 import { ItemsComponent } from './content/items/items.component';
+import { ItemsListComponent } from './content/items/items-list/items-list.component';
+import { ItemsFormComponent } from './content/items/items-form/items-form.component';
+import { ItemsDetailComponent } from './content/items/items-detail/items-detail.component';
+import { ItemsPlaceholderComponent } from './content/items/items-placeholder/items-placeholder.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { ItemsComponent } from './content/items/items.component';
     HeaderComponent,
     HomeComponent,
     ContentComponent,
-    ItemsComponent
+    ItemsComponent,
+    ItemsListComponent,
+    ItemsFormComponent,
+    ItemsDetailComponent,
+    ItemsPlaceholderComponent
   ],
   imports: [
     BrowserModule,

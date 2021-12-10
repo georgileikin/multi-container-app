@@ -1,10 +1,17 @@
 <div class="d-flex h-100 justify-content-center align-items-center">
-  <figure class="text-center">
+  <figure class="text-center" *ngIf="!isAuthenticated">
     <blockquote class="blockquote">
       <p>Please log in.</p>
     </blockquote>
     <figcaption class="blockquote-footer">
       You have to be logged in to view this page
     </figcaption>
+  </figure>
+
+  <figure class="text-center" *ngIf="isAuthenticated">
+    <blockquote class="blockquote">
+      <p>Congratulations!</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">You are logged in.</figcaption>
   </figure>
 </div>
