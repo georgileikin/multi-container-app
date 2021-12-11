@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as itemsStore from './items-store/items.reducer';
+import * as itemsActions from './items-store/items.actions';
 
 @Component({
   selector: 'app-items',
@@ -6,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./items.component.scss']
 })
 export class ItemsComponent implements OnInit {
-  constructor() {}
+  constructor(private store: Store<itemsStore.ItemsState>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(new itemsActions.FetchItems());
+  }
 }

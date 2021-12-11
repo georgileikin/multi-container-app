@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -21,6 +21,8 @@ import { ItemsListComponent } from './content/items/items-list/items-list.compon
 import { ItemsFormComponent } from './content/items/items-form/items-form.component';
 import { ItemsDetailComponent } from './content/items/items-detail/items-detail.component';
 import { ItemsPlaceholderComponent } from './content/items/items-placeholder/items-placeholder.component';
+import { ItemsEffects } from './content/items/items-store/items.effects';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,11 +43,17 @@ import { ItemsPlaceholderComponent } from './content/items/items-placeholder/ite
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ItemsEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

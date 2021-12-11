@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+
+import * as appStore from '../../../store/app.reducer';
+import { ItemsModel } from '../items.model';
 
 @Component({
   selector: 'app-items-list',
@@ -6,7 +11,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./items-list.component.scss']
 })
 export class ItemsListComponent implements OnInit {
-  constructor() {}
+  items: ItemsModel[];
 
-  ngOnInit(): void {}
+  constructor(private store: Store<appStore.AppState>) {}
+
+  ngOnInit(): void {
+    this.store
+      .select('items')
+      .pipe(
+        map((itemsState: appStore.AppState['items']) => {
+          return itemsState.list;
+        })
+      )
+      .subscribe((itemList: ItemsModel[]) => {
+        this.items = itemList;
+      });
+  }
 }

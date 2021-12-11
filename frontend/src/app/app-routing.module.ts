@@ -6,7 +6,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { ItemsListComponent } from './content/items/items-list/items-list.component';
 import { ItemsDetailComponent } from './content/items/items-detail/items-detail.component';
 import { ItemsFormComponent } from './content/items/items-form/items-form.component';
-import {ItemsPlaceholderComponent} from "./content/items/items-placeholder/items-placeholder.component";
+import { ItemsPlaceholderComponent } from './content/items/items-placeholder/items-placeholder.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
