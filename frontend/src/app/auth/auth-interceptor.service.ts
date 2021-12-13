@@ -32,8 +32,6 @@ export class AuthInterceptorService implements HttpInterceptor {
       exhaustMap((user: UserModel) => {
         if (!user) return next.handle(req);
 
-        console.log(user);
-
         const authRequest = req.clone({
           headers: new HttpHeaders().set(
             'Authorization',

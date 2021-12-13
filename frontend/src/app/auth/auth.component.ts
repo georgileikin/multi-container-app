@@ -13,9 +13,11 @@ import { UserModel } from './user.model';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  @ViewChild('fetchTokenForm') fetchTokenForm: NgForm;
+  @ViewChild('authForm') authForm: NgForm;
   loggedInUser: UserModel = null;
   isAuthenticated: boolean = false;
+  isAuthenticating: boolean = false;
+  authError: string = null;
 
   constructor(private store: Store<appStore.AppState>) {}
 
@@ -24,6 +26,8 @@ export class AuthComponent implements OnInit {
       .select('auth')
       .pipe(
         map((authState: appStore.AppState['auth']) => {
+          this.isAuthenticating = authState.isAuthenticating;
+          this.authError = authState.authError;
           return authState.user;
         })
       )
@@ -36,14 +40,20 @@ export class AuthComponent implements OnInit {
   onSubmit() {
     this.store.dispatch(
       new authActions.Authenticate({
-        username: this.fetchTokenForm.value.username,
-        password: this.fetchTokenForm.value.password
+        username: this.authForm.value.username,
+        password: this.authForm.value.password
       })
     );
+
+    this.authForm.reset();
   }
 
   onLogout() {
     this.store.dispatch(new authActions.ClearAuthentication());
+  }
+
+  clearAuthError() {
+    this.store.dispatch(new authActions.ClearAuthenticationError());
   }
 
   getUserString() {

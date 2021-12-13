@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, tap, switchMap } from 'rxjs';
+import { map, tap, switchMap, catchError, of } from 'rxjs';
 
 import * as authActions from './auth.actions';
 import { AuthService } from '../auth.service';
@@ -40,6 +40,10 @@ const handleAuthenticate = (authResponse: TokenResponse) => {
   });
 };
 
+const handleErrorResponse = (authError: HttpErrorResponse) => {
+  return of(new authActions.AuthenticateFail({ authError }));
+};
+
 @Injectable()
 export class AuthEffects {
   constructor(
@@ -66,6 +70,9 @@ export class AuthEffects {
             }),
             map((response: TokenResponse) => {
               return handleAuthenticate(response);
+            }),
+            catchError((authError: HttpErrorResponse) => {
+              return handleErrorResponse(authError);
             })
           );
       })
