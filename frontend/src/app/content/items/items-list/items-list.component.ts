@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import {expand, map} from 'rxjs';
 
 import * as appStore from '../../../store/app.reducer';
 import { ItemsModel } from '../items.model';

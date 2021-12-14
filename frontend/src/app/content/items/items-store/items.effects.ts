@@ -14,10 +14,10 @@ export class ItemsEffects {
     this.actions$.pipe(
       ofType(itemsActions.FETCH_ITEMS),
       switchMap((itemsAction: itemsActions.FetchItem) => {
-        return this.httpClient.get<ItemsModel[]>('/api/items/');
+        return this.httpClient.get<{ content: ItemsModel[] }>('/api/items/');
       }),
-      map((items: ItemsModel[]) => {
-        return new itemsActions.FetchItemsSuccess(items);
+      map((items: { content: ItemsModel[] }) => {
+        return new itemsActions.FetchItemsSuccess(items.content);
       })
     )
   );

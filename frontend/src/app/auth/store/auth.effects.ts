@@ -89,10 +89,20 @@ export class AuthEffects {
           return { type: 'DUMMY' };
         }
 
+        const user = new UserModel(
+          authUser.username,
+          authUser.firstName,
+          authUser.lastName,
+          authUser.email,
+          authUser.permissions,
+          authUser._token,
+          authUser._expiration
+        );
+
         this.authService.setLogoutTimer(authUser._expiration - Date.now());
 
         return new authActions.AuthenticateSuccess({
-          user: authUser,
+          user,
           redirect: false
         });
       })
